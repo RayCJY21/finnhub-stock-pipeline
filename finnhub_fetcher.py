@@ -16,12 +16,12 @@ pytz: change to locate datetime
 load_dotenv()
 api_key = os.getenv("FINNHUB_API_KEY")
 client = finnhub.Client(api_key=api_key)
+def get_local_time():
+    pacific = pytz.timezone("America/Los_Angeles")
+    return datetime.now(pacific).strftime("%Y-%m-%d %H:%M:%S")
 
 
 def fetch_data(tickers):
-    la_tz = pytz.timezone("America/Los_Angeles")
-    now = datetime.now(la_tz).strftime("%Y-%m-%d %H:%M:%S")
-
 
     """
     Initializes an empty list to store results.
@@ -37,8 +37,7 @@ def fetch_data(tickers):
                 "high": q.get("h"),
                 "low": q.get("l"),
                 "open": q.get("o"),
-                "prev_close": q.get("pc"),
-                "timestamp": now
+                "prev_close": q.get("pc")
             })
         except Exception as e:
             print(f"Error fetching {ticker}: {e}")

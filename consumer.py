@@ -4,7 +4,6 @@ import pandas as pd
 import psycopg2
 from datetime import datetime
 import os
-import pytz
 
 from config import TICKERS
 
@@ -70,16 +69,10 @@ for message in consumer:
     buffer.append(data)
     if len(buffer) >= batch_size:
         df = pd.DataFrame(buffer)
-        la_tz = pytz.timezone("America/Los_Angeles")
-        filename = f"{save_dir}/stock_{datetime.now(la_tz).strftime("%Y-%m-%d %H:%M:%S")}.parquet"
-        df.to_parquet(filename, index=False)
-        print(f"✅ Saved {len(buffer)} records to {filename}")
-        buffer = []
 
-    buffer.append(data)
-    if len(buffer) >= batch_size:
-        df = pd.DataFrame(buffer)
-        filename = f"{save_dir}/stock_{datetime.now().strftime('%Y%m%d_%H%M%S')}.parquet"
+        safe_time = datetime.now().strftime("%Y%m%d_%H%M%S") # Generates a safe, timestamped filename, so each file is unique. Example output: "20250404_154523"
+        filename = f"{save_dir}/stock_{safe_time}.parquet" # parquet_data/stock_20250404_154523.parquet
+
         df.to_parquet(filename, index=False)
         print(f"✅ Saved {len(buffer)} records to {filename}")
-        buffer = []
+        buffer = [] # Reset buffer after the process
