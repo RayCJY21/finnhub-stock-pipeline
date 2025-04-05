@@ -1,0 +1,44 @@
+# Python
+venv/
+venv1/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# API Key
+.env
+
+# Data
+*.parquet
+.parquet_data/
+*.db
+*.csv
+*.json
+*.xlsx
+*.sqlite3
+.parquet/
+
+# logs
+*.log
+*.pid
+*.sqlite3
+
+# Docker volumes / Kafka
+kafka/data/
+kafka/logs/
+
+
+# PostgreSQL volume
+postgres/data/
+postgres/data/*
+
+# Airflow logs
+logs/
+
+# VSCode / JetBrains
+.vscode/
+.idea/
+
+# Mac trash
+.DS_Store

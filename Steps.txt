@@ -1,0 +1,53 @@
+1. Project and Git setup
+    -- Create file --
+    mkdir finnhub-stock-pipeline
+    
+    -- Git -- 
+    # initailize git --> .git/ will be create
+    git init
+
+    # Keeps your repo clean and lightweight, Protects secrets, Prevents conflicts from IDE-specific files, Keeps your Git history focused on actual code + config.
+    touch .gitignore
+
+    # Brief about the project
+    touch README.md
+    
+    # Check status
+    git status
+
+    # add all files
+    git add .
+
+    # commit on
+    git commit -m "Initial commit"
+
+    # Adds a remote repository named origin to your local repo.
+    git remote add origin https://github.com/YOUR_USERNAME/finnhub-stock-pipeline.git
+
+    # Renames (-M force to rename)your current branch to main.
+    git branch -M main
+
+    # Pushes your local main branch to the remote GitHub repo. -u sets the upstream branch — so next time, you can just run git push or git pull without extra flags.
+    git push -u origin main
+
+    ''' Everytime we add new git version
+    git add .
+    git commit -m " "
+    git push
+    '''
+
+    Create virtual environment:
+    python3 -m venv venv1
+    source venv1/bin/activate
+
+    Install packages
+    pip install pandas finnhub-python python-dotenv
+    pip freeze > requirements.txt
+
+    Create .env to store API key
+    touch .env 
+    FINNHUB_API_KEY=your_finnhub_api_key
+
+
+2. Fetching data from Finnhub:
+    touch finnhub_fetcher.py
