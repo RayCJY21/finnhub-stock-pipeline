@@ -1,0 +1,42 @@
+# Explanation of Each Python and Docker File
+
+---
+
+## 🔧 finnhub-stock-pipeline/
+
+### `producer.py`
+- **Purpose**: Fetches live stock data from Finnhub API and sends to Kafka topic `stock_prices`.
+- **Key Components**:
+  - `fetch_data()`: Retrieves live stock quote for each ticker.
+  - `KafkaProducer`: Sends serialized JSON stock data to Kafka.
+  - `while True`: Loop every 10 seconds to continuously fetch and push data.
+
+### `consumer.py`
+- **Purpose**: Consumes stock data from Kafka topic and saves into PostgreSQL, with optional Parquet backup.
+- **Key Components**:
+  - `KafkaConsumer`: Listens to topic `stock_prices`.
+  - `psycopg2`: Inserts data into table `stock_prices`.
+  - `Parquet`: Batches every 20 records and saves to local `.parquet` files.
+
+---
+
+## 🐳 docker-compose.yml (used in both airflow/ and finnhub-stock-pipeline/)
+
+### Kafka Setup:
+- `zookeeper`: Required service for Kafka broker.
+- `kafka`: Main broker listening on 9092.
+- Configured with `KAFKA_ADVERTISED_LISTENERS` for producer to connect.
+
+### PostgreSQL Setup:
+- Service `postgres` with DB name `stockdb`, user `stockuser`, password `stockpass`.
+- Port 5432 exposed to host.
+- Volume `postgres_data` mounted for persistence.
+
+---
+
+## 📅 airflow/dags/finnhub_to_postgres_dag.py
+- **Purpose**: Airflow DAG that schedules stock fetching job periodically.
+- **Key Components**:
+  - `fetch_and_save()`: Identical to `producer`, fetches stock data and writes to PostgreSQL.
+  - `PythonOperator`: Schedules task to run every 5 minutes.
+  - `default_args`: Retry config, owner, and DAG scheduling metadata.
