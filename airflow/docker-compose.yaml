@@ -64,7 +64,7 @@ x-airflow-common:
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
     AIRFLOW__CORE__LOAD_EXAMPLES: 'true'
     AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session'
-    FINNHUB_API_KEY: cvn2irhr01ql90q14680cvn2irhr01ql90q1468g
+    FINNHUB_API_KEY: # Change to your api code
 
     # yamllint disable rule:line-length
     # Use simple http server on scheduler for health checks
