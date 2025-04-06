@@ -1,0 +1,35 @@
+# Project Steps
+
+## ✅ Step 1: Initialize finnhub-stock-pipeline
+mkdir finnhub-stock-pipeline
+cd finnhub-stock-pipeline
+python3 -m venv venv
+source venv/bin/activate
+pip install yfinance kafka-python psycopg2-binary python-dotenv streamlit
+
+## ✅ Step 2: Setup Kafka + PostgreSQL using docker-compose
+# Created docker-compose.yml with Kafka/Zookeeper/PostgreSQL
+# Started services
+
+docker compose up -d
+
+## ✅ Step 3: Build Producer & Consumer
+# Created producer.py to fetch stock data from Finnhub
+# Created consumer.py to consume and store into PostgreSQL
+
+## ✅ Step 4: Git & cleanup
+# Initialized .git, added .gitignore
+# Removed large files with BFG Repo-Cleaner
+
+## ✅ Step 5: Airflow
+mkdir airflow
+cd airflow
+mkdir dags logs plugins
+echo -e "AIRFLOW_UID=$(id -u)" > .env
+curl -LfO 'https://airflow.apache.org/docs/apache-airflow/2.7.2/docker-compose.yaml'
+docker compose up airflow-init
+docker compose up -d
+
+## ✅ Step 6: Created DAG (finnhub_to_postgres_dag.py)
+# DAG uses PythonOperator to fetch from Finnhub and write to PostgreSQL
+
