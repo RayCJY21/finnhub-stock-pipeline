@@ -13,7 +13,7 @@ default_args = {
 
 # 可自行擴充
 TICKERS = ["AAPL", "MSFT", "GOOGL", "AMZN", "META", "TSLA", "NVDA"]
-FINNHUB_API_KEY = "cvn2irhr01ql90q14680cvn2irhr01ql90q1468g"  # Change to your api code
+FINNHUB_API_KEY = "# Change to your api code"  # Change to your api code
 
 POSTGRES_CONN = {
     'dbname': 'stockdb',
