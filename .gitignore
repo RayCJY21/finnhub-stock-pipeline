@@ -5,9 +5,11 @@ __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
+*.pyc
 
 # API Key
 .env
+.env.*
 
 # Data
 *.parquet
@@ -18,6 +20,9 @@ __pycache__/
 *.xlsx
 *.sqlite3
 .parquet/
+
+# Jupyter
+*.ipynb
 
 # logs
 *.log
@@ -33,8 +38,11 @@ kafka/logs/
 postgres/data/
 postgres/data/*
 
-# Airflow logs
-logs/
+Airflow log & meta
+airflow/logs/
+airflow/airflow.cfg
+airflow/unittests.cfg
+airflow/db.sqlite
 
 # VSCode / JetBrains
 .vscode/
@@ -42,3 +50,10 @@ logs/
 
 # Mac trash
 .DS_Store
+
+# Docker
+*.pid
+*.sock
+*.tar
+*.gz
+*.log
